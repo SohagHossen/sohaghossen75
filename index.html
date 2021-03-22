@@ -576,15 +576,15 @@
           </div>
 
           <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form action="forms/contact.php" method="post" role="form" class="php-email-form" name="google-sheet">
               <div class="row">
                 <div class="form-group col-md-6">
-                  <label for="name">Your Name</label>
-                  <input type="text" name="name" class="form-control" id="name" required>
+                  <label for="Name">Your Name</label>
+                  <input type="text" name="Name" class="form-control" id="name" required>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="name">Your Email</label>
-                  <input type="email" class="form-control" name="email" id="email" required>
+                  <label for="Email">Your Email</label>
+                  <input type="email" class="form-control" name="Email" id="email" required>
                 </div>
               </div>
               <div class="form-group">
@@ -593,14 +593,14 @@
               </div>
               <div class="form-group">
                 <label for="name">Message</label>
-                <textarea class="form-control" name="message" rows="10" required></textarea>
+                <textarea class="form-control" name="Message" rows="10" required></textarea>
               </div>
               <div class="my-3">
                 <div class="loading">Loading</div>
                 <div class="error-message"></div>
                 <div class="sent-message">Your message has been sent. Thank you!</div>
               </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
+              <div class="text-center"><button type="submit" name="submit">Send Message</button></div>
             </form>
           </div>
 
@@ -628,6 +628,17 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxH3ObbURVDaSe7QTV8yeculjvSdV6ORwLA1feqPR0daLHkUUmcKDpB1JG3Y56J-dKGIA/exec'
+    const form = document.forms['google-sheet']
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .catch(error => console.error('Error!', error.message))
+    })
+</script>
 
 </body>
 
